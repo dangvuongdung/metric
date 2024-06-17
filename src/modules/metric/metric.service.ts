@@ -58,13 +58,7 @@ export class MetricService {
       take: limit,
     });
 
-    const result = metrics.map((e) => ({
-      ...e,
-      unit: formatUnit || e.unit,
-      value: formatUnit
-        ? convertMetricUnit(e.type, e.unit, formatUnit, e.value)
-        : e.value,
-    }));
+    const result = this.convertUnitMetric(metrics, formatUnit);
 
     return { total: totalMetric, items: result };
   }
